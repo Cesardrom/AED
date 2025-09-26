@@ -1,7 +1,5 @@
 # Ejercicios de Acceso a Datos: "Ficheros"
 
-#### Ejercicio realizado por César Domínguez Romero
-
 ## 1) Hola fichero (crear y leer)
 
 Enunciado: Crea un fichero datos.txt con el texto "Hola Mundo desde PHP" y, a continuación, léelo y muestra su contenido por pantalla.
@@ -743,3 +741,5 @@ comidas.txt
 tacos
 ramen
 helado.
+
+#### Ejercicio realizado por César Domínguez Romero
