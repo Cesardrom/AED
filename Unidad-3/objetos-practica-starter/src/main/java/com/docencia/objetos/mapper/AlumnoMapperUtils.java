@@ -2,6 +2,7 @@ package com.docencia.objetos.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.docencia.objetos.domain.Alumno;
 import com.docencia.objetos.repo.jpa.AlumnoEntity;
@@ -46,5 +47,13 @@ public class AlumnoMapperUtils {
             alumnos.add(to(alumnoEntity));
         }
         return alumnos;
+    }
+
+    public static Optional<Alumno> to(Optional<AlumnoEntity> alumnoEntity) {
+        Optional<Alumno> resultado = java.util.Optional.empty();
+        if (alumnoEntity == null || alumnoEntity.isEmpty()){
+            return resultado ;
+        }
+        return  resultado.map(alumno -> to(alumnoEntity).orElse(null));
     }
 }

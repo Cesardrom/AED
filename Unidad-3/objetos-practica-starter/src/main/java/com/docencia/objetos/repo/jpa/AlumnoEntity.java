@@ -1,7 +1,12 @@
 package com.docencia.objetos.repo.jpa;
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name="alumnos")
@@ -20,6 +25,10 @@ public class AlumnoEntity {
 
 
   public AlumnoEntity() {
+  }
+
+  public AlumnoEntity(Long id) {
+    this.id = id;
   }
 
   public AlumnoEntity(Long id, String nombre, String email, String ciclo) {

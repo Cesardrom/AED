@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.docencia.objetos.domain.Alumno;
 import com.docencia.objetos.mapper.AlumnoMapperUtils;
+import com.docencia.objetos.repo.jpa.AlumnoEntity;
 import com.docencia.objetos.repo.jpa.AlumnoJpaRepository;
 
 @Repository
@@ -27,28 +28,27 @@ public class AlumnoRepositoryJpaAdapter implements AlumnoRepository {
 
   @Override
   public Optional<Alumno> findById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar usando jpa.findById() y mapear a dominio");
+    return AlumnoMapperUtils.to(jpa.findById(id));
   }
 
   @Override
   public Alumno save(Alumno alumno) {
     return AlumnoMapperUtils.to(jpa.save(AlumnoMapperUtils.to(alumno)));
-    return alumno;
   }
 
   @Override
   public boolean existsByEmail(String email) {
-    throw new UnsupportedOperationException("TODO: implementar (método derivado en JPA o consulta)");
+    return jpa.existsByEmail(email);
   }
 
   @Override
   public void deleteById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar jpa.deleteById(id)");
+    jpa.delete(new AlumnoEntity(id));
   }
 
   @Override
   public long count() {
-    throw new UnsupportedOperationException("TODO: implementar jpa.count()");
+    return jpa.count();
   }
 
   // TODO: métodos de mapeo toDomain/toEntity
