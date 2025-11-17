@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @Profile("h2")
@@ -21,33 +22,43 @@ public class AlumnoRepositoryJpaAdapter implements AlumnoRepository {
 
   @Override
   public List<Alumno> findAll() {
-    throw new UnsupportedOperationException("TODO: implementar usando jpa.findAll() y mapear a dominio");
+    return jpa.findAll().stream()
+        .map(this::toDomain)
+        .collect(Collectors.toList());
   }
 
   @Override
   public Optional<Alumno> findById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar usando jpa.findById() y mapear a dominio");
+    return jpa.findById(id).map(this::toDomain);
   }
 
   @Override
   public Alumno save(Alumno alumno) {
-    throw new UnsupportedOperationException("TODO: mapear dominio->entidad, jpa.save, entidad->dominio");
+    AlumnoEntity entity = toEntity(alumno);
+    AlumnoEntity saved = jpa.save(entity);
+    return toDomain(saved);
   }
 
   @Override
   public boolean existsByEmail(String email) {
-    throw new UnsupportedOperationException("TODO: implementar (método derivado en JPA o consulta)");
+    return jpa.existsByEmail(email);
   }
 
   @Override
   public void deleteById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar jpa.deleteById(id)");
+    jpa.deleteById(id);
   }
 
   @Override
   public long count() {
-    throw new UnsupportedOperationException("TODO: implementar jpa.count()");
+    return jpa.count();
   }
 
-  // TODO: métodos de mapeo toDomain/toEntity
+  private Alumno toDomain(AlumnoEntity entity) {
+    return new Alumno(entity.getId(), entity.getNombre(), entity.getEmail(), entity.getCiclo());
+  }
+
+  private AlumnoEntity toEntity(Alumno alumno) {
+    return new AlumnoEntity(alumno.getId(), alumno.getNombre(), alumno.getEmail(), alumno.getCiclo());
+  }
 }

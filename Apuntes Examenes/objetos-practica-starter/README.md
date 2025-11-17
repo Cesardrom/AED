@@ -177,32 +177,34 @@ public class DemoApplication {
 }
 ```
 
-## Implementaciones Pendientes (TODOs)
+## Implementaciones Completadas
 
 ### En Alumno.java
 
-- Definir constructores
-- Implementar getters y setters
-- Añadir validaciones Jakarta si se desea
+- **Campos definidos**: `id`, `nombre`, `email`, `ciclo` con encapsulación privada.
+- **Constructores implementados**: Constructor vacío, constructor con todos los campos, y constructor sin `id` para nuevos alumnos.
+- **Getters y setters**: Implementados para todos los campos.
+- **Métodos Object**: `equals()`, `hashCode()` y `toString()` basados en `id`.
+- **Validaciones**: No se añadieron validaciones Jakarta, pero se pueden agregar en futuras iteraciones.
 
 ### En AlumnoRepositoryJpaAdapter.java
 
-- Implementar `findAll()`: usar `jpa.findAll()` y mapear a dominio
-- Implementar `findById()`: usar `jpa.findById()` y mapear a dominio
-- Implementar `save()`: mapear dominio→entidad, guardar, mapear entidad→dominio
-- Implementar `existsByEmail()`: usar método derivado en JPA
-- Implementar `deleteById()`: usar `jpa.deleteById(id)`
-- Implementar `count()`: usar `jpa.count()`
-- Añadir métodos de mapeo `toDomain()` y `toEntity()`
+- **findAll()**: Implementado usando `jpa.findAll()` y mapeando entidades a objetos de dominio con `stream().map(this::toDomain)`.
+- **findById()**: Implementado usando `jpa.findById()` y mapeando opcionalmente con `.map(this::toDomain)`.
+- **save()**: Implementado mapeando dominio→entidad, guardando con `jpa.save()`, y mapeando entidad→dominio.
+- **existsByEmail()**: Implementado usando el método derivado `jpa.existsByEmail(email)`.
+- **deleteById()**: Implementado usando `jpa.deleteById(id)`.
+- **count()**: Implementado usando `jpa.count()`.
+- **Métodos de mapeo**: `toDomain()` y `toEntity()` añadidos para conversión entre dominio y entidad.
 
 ### En AlumnoService.java
 
-- Implementar `listar()`: llamar a `repo.findAll()`
-- Implementar `obtener()`: llamar a `repo.findById()`, manejar Optional
-- Implementar `crear()`: validar email único, guardar
-- Implementar `actualizar()`: verificar existencia, actualizar
-- Implementar `borrar()`: verificar existencia, eliminar
-- Definir excepciones personalizadas si se desea (BadRequest, NotFound)
+- **listar()**: Implementado llamando a `repo.findAll()`.
+- **obtener()**: Implementado llamando a `repo.findById()`, manejando `Optional` y lanzando excepción si no encontrado.
+- **crear()**: Implementado validando unicidad de email con `repo.existsByEmail()`, guardando si válido.
+- **actualizar()**: Implementado verificando existencia, validando unicidad de email (si cambió), y guardando.
+- **borrar()**: Implementado verificando existencia antes de eliminar.
+- **Manejo de errores**: Usando `RuntimeException` para errores simples; se pueden definir excepciones personalizadas (BadRequest, NotFound) en futuras iteraciones.
 
 ## Ejecución
 
