@@ -1,0 +1,22 @@
+{
+  "tareas": [
+    {
+      "titulo": "Texto",
+      "descripcion": "Texto",
+      "completada": true,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "titulo": "Hacer la práctica 1",
+      "descripcion": "Proyecto tareas en memoria",
+      "completada": true
+    },
+    {
+      "id": "78b9",
+      "titulo": "Tarea creada desde index-rest.ts",
+      "descripcion": "Probando POST contra json-server",
+      "completada": false
+    }
+  ]
+}

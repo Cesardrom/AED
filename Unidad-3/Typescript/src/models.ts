@@ -19,3 +19,8 @@ export interface Tarea {
    */
   completada: boolean;
 }
+
+
+export type IdTarea = number;
+
+export type FiltroTarea = "todas" | "pendientes" | "completadas";
